@@ -1,7 +1,7 @@
 import { getAllButterflies, rateButterFly } from "./butterfly.service";
 import { ButterflyNotFound, ButterflyRatingExists, InvalidRequestPayload } from "./exception";
 
-const patchButterflyRating = async (req, res) => {
+const postButterflyRating = async (req, res) => {
     try {
         const { butterflyId, userId, rating } = req.body;
 
@@ -15,7 +15,7 @@ const patchButterflyRating = async (req, res) => {
         return res.status(200).json(newRating);
 
     } catch (error) {
-        console.error(`Error in ${patchButterflyRating.name}:`, error);
+        console.error(`Error in ${postButterflyRating.name}:`, error);
         if (error instanceof ButterflyNotFound || error instanceof ButterflyRatingExists || error instanceof InvalidRequestPayload) {
             return res.status(400).json({ error: error.message });
         }
@@ -35,4 +35,4 @@ const getButterflies = async (req, res) => {
     }
 };
 
-export { patchButterflyRating, getButterflies };
+export { postButterflyRating, getButterflies };
